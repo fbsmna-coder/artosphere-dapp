@@ -7,7 +7,20 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Artosphere | Golden Ratio DeFi Protocol",
   description:
-    "Artosphere (ARTS) - DeFi protocol built on the mathematics of the golden ratio. Stake, govern, and explore quests on Base Sepolia.",
+    "Artosphere (ARTS) — World's first physics-backed DeFi protocol. 36 Standard Model parameters from φ and M_Pl. Stake, govern, and discover on Base Mainnet.",
+  openGraph: {
+    title: "Artosphere | The Golden Ratio Protocol",
+    description: "World's first DeFi protocol where every parameter derives from φ=(1+√5)/2. 27 contracts, 400 tests, 15 Spectral NFTs on Base Mainnet.",
+    url: "https://artosphere.xyz",
+    siteName: "Artosphere",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@FSspronov",
+    title: "Artosphere | Physics-Backed DeFi",
+    description: "36 Standard Model constants from one number. The protocol that KillSwitches itself if wrong.",
+  },
   keywords: [
     "Artosphere",
     "ARTS",

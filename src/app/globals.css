@@ -48,6 +48,13 @@ body {
   background-clip: text;
 }
 
+.gradient-text {
+  background: linear-gradient(to right, #f59e0b, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .phi-button {
   background: linear-gradient(135deg, #FFD700 0%, #C5A028 100%);
   color: #0a0a0f;

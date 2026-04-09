@@ -5,7 +5,7 @@ import { StatCard } from "../../components/StatCard";
 import {
   useNextPaperId,
   usePaper,
-  useReviewCount,
+  useRoundReviews,
 } from "../../hooks/usePeerReview";
 
 /* ------------------------------------------------------------------ */
@@ -65,7 +65,7 @@ function formatCountdown(deadline: number): string {
 
 function PaperCard({ paperId }: { paperId: number }) {
   const paper = usePaper(paperId);
-  const reviewCount = useReviewCount(paperId);
+  const reviews = useRoundReviews(paperId, paper?.currentRound ?? 0);
 
   if (!paper) return null;
 
@@ -73,11 +73,22 @@ function PaperCard({ paperId }: { paperId: number }) {
   const statusColor = STATUS_COLORS[statusLabel] || STATUS_COLORS.SUBMITTED;
   const statusGlow = STATUS_GLOW[statusLabel] || "";
 
+  // Compute round deadline from roundStartedAt + roundDuration
+  // Fibonacci durations: 5d, 8d, 13d, 21d
+  const ROUND_DURATIONS = [5 * 86400, 8 * 86400, 13 * 86400, 21 * 86400];
+  const roundDuration = ROUND_DURATIONS[paper.currentRound] ?? ROUND_DURATIONS[3];
+  const commitDeadline = paper.roundStartedAt > 0
+    ? paper.roundStartedAt + Math.floor((roundDuration * 2) / 3)
+    : 0;
+  const revealDeadline = paper.roundStartedAt > 0
+    ? paper.roundStartedAt + roundDuration
+    : 0;
+
   const deadline =
     paper.status === 1
-      ? paper.reviewDeadline
-      : paper.status === 1
-        ? paper.revealDeadline
+      ? commitDeadline
+      : paper.status === 2
+        ? revealDeadline
         : 0;
 
   return (
@@ -121,7 +132,7 @@ function PaperCard({ paperId }: { paperId: number }) {
         <div className="text-center">
           <div className="text-[10px] text-white/30 uppercase">Reviews</div>
           <div className="text-xs font-bold text-amber-400">
-            {reviewCount}
+            {reviews.length}
           </div>
         </div>
         <div className="text-center">

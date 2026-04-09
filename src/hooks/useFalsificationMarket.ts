@@ -23,7 +23,7 @@ export function useHypothesis(hypothesisId: number) {
   const { data } = useReadContract({
     address: marketAddr,
     abi: FALSIFICATION_MARKET_ABI,
-    functionName: 'hypotheses',
+    functionName: 'getHypothesis',
     args: [BigInt(hypothesisId)],
     query: { enabled: hypothesisId >= 0 },
   });
@@ -48,6 +48,31 @@ export function useHypothesis(hypothesisId: number) {
   };
 }
 
+export function useAttempt(hypothesisId: number, attemptId: number) {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'getAttempt',
+    args: [BigInt(hypothesisId), BigInt(attemptId)],
+    query: { enabled: hypothesisId >= 0 && attemptId >= 0 },
+  });
+
+  if (!data) return null;
+
+  const [falsifier, methodHash, method, stake, submittedAt, status] =
+    data as [string, string, string, bigint, bigint, number];
+
+  return {
+    falsifier,
+    methodHash,
+    method,
+    stake: formatEther(stake),
+    stakeRaw: stake,
+    submittedAt: Number(submittedAt),
+    status, // 0 = PENDING, 1 = RESOLVED_SURVIVED, 2 = RESOLVED_FALSIFIED, 3 = EXPIRED
+  };
+}
+
 export function useHardnessMultiplier(hypothesisId: number) {
   const { data } = useReadContract({
     address: marketAddr,
@@ -58,6 +83,67 @@ export function useHardnessMultiplier(hypothesisId: number) {
   });
 
   return data !== undefined ? Number(data as bigint) / 1e18 : 1;
+}
+
+export function useAttemptCount(hypothesisId: number) {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'getAttemptCount',
+    args: [BigInt(hypothesisId)],
+    query: { enabled: hypothesisId >= 0 },
+  });
+
+  return data !== undefined ? Number(data as bigint) : 0;
+}
+
+export function useTotalStaked() {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'totalStaked',
+  });
+
+  return data !== undefined ? formatEther(data as bigint) : '0';
+}
+
+export function useReward(hypothesisId: number, attemptId: number, account: `0x${string}` | undefined) {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'getReward',
+    args: account ? [BigInt(hypothesisId), BigInt(attemptId), account] : undefined,
+    query: { enabled: hypothesisId >= 0 && attemptId >= 0 && !!account },
+  });
+
+  if (!data) return { amount: '0', claimed: false };
+
+  const [amount, claimed] = data as [bigint, boolean];
+  return { amount: formatEther(amount), claimed };
+}
+
+export function useEstimateSurvivalReward(hypothesisId: number, attemptId: number) {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'estimateSurvivalReward',
+    args: [BigInt(hypothesisId), BigInt(attemptId)],
+    query: { enabled: hypothesisId >= 0 && attemptId >= 0 },
+  });
+
+  return data !== undefined ? formatEther(data as bigint) : '0';
+}
+
+export function useEstimateFalsificationReward(hypothesisId: number, attemptId: number) {
+  const { data } = useReadContract({
+    address: marketAddr,
+    abi: FALSIFICATION_MARKET_ABI,
+    functionName: 'estimateFalsificationReward',
+    args: [BigInt(hypothesisId), BigInt(attemptId)],
+    query: { enabled: hypothesisId >= 0 && attemptId >= 0 },
+  });
+
+  return data !== undefined ? formatEther(data as bigint) : '0';
 }
 
 /* ------------------------------------------------------------------ */

@@ -28,7 +28,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo.png"
               alt="Artosphere"
               width={32}
               height={32}

@@ -42,7 +42,7 @@ const STATS = [
 const TOKEN_INFO = [
   { label: "Name", value: "Artosphere" },
   { label: "Symbol", value: "ARTS" },
-  { label: "Chain", value: "Base Sepolia" },
+  { label: "Chain", value: "Base Mainnet" },
   { label: "Chain ID", value: String(CHAIN_ID) },
   { label: "Decimals", value: "18" },
   {
@@ -139,7 +139,7 @@ export default function Dashboard() {
       <section className="text-center mb-fib-89">
         <div className="inline-block mb-fib-21">
           <Image
-            src="/images/logo.jpeg"
+            src="/images/logo.png"
             alt="Artosphere"
             width={96}
             height={96}
@@ -289,7 +289,7 @@ export default function Dashboard() {
       {/* Contracts Reference */}
       <section className="mt-fib-89">
         <h2 className="text-sm font-semibold text-gold-dark uppercase tracking-widest mb-fib-21">
-          Smart Contracts (Base Sepolia)
+          Smart Contracts (Base Mainnet)
         </h2>
         <div className="phi-card overflow-x-auto">
           <table className="w-full text-sm">

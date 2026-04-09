@@ -31,16 +31,16 @@ const config: Config = {
         "phi-3xl": "6.854rem",
       },
       spacing: {
-        "fib-1": "0.0625rem",  // 1px
-        "fib-2": "0.125rem",   // 2px
-        "fib-3": "0.1875rem",  // 3px
-        "fib-5": "0.3125rem",  // 5px
-        "fib-8": "0.5rem",     // 8px
-        "fib-13": "0.8125rem", // 13px
-        "fib-21": "1.3125rem", // 21px
-        "fib-34": "2.125rem",  // 34px
-        "fib-55": "3.4375rem", // 55px
-        "fib-89": "5.5625rem", // 89px
+        "fib-1": "0.0625rem",
+        "fib-2": "0.125rem",
+        "fib-3": "0.1875rem",
+        "fib-5": "0.3125rem",
+        "fib-8": "0.5rem",
+        "fib-13": "0.8125rem",
+        "fib-21": "1.3125rem",
+        "fib-34": "2.125rem",
+        "fib-55": "3.4375rem",
+        "fib-89": "5.5625rem",
       },
       borderRadius: {
         phi: "1.618rem",
@@ -61,6 +61,7 @@ const config: Config = {
       animation: {
         "phi-pulse": "phiPulse 2.618s ease-in-out infinite",
         "phi-spin": "phiSpin 1.618s linear infinite",
+        "golden-float": "goldenFloat 3s ease-in-out infinite",
       },
       keyframes: {
         phiPulse: {
@@ -70,6 +71,10 @@ const config: Config = {
         phiSpin: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        goldenFloat: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
         },
       },
     },
