@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --gold: #FFD700;
+  --gold-dark: #C5A028;
+  --gold-muted: #8B7355;
+  --bg-dark: #0a0a0f;
+  --bg-card: #111118;
+  --border-dark: #1a1a2e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: rgba(255, 215, 0, 0.3);
+  color: #ffffff;
+}
+
+.phi-card {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.03) 0%, var(--bg-card) 100%);
+  border: 1px solid var(--border-dark);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.phi-card:hover {
+  border-color: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #FFD700 0%, #C5A028 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.phi-button {
+  background: linear-gradient(135deg, #FFD700 0%, #C5A028 100%);
+  color: #0a0a0f;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.phi-button:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  transform: translateY(-1px);
+}
