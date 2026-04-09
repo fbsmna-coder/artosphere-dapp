@@ -10,6 +10,9 @@ const NAV_ITEMS = [
   { href: '/discoveries', label: 'Discoveries' },
   { href: '/stake', label: 'Stake' },
   { href: '/swap', label: 'Swap' },
+  { href: '/spectral', label: 'Spectral' },
+  { href: '/review', label: 'Review' },
+  { href: '/falsify', label: 'Falsify' },
   { href: '/quests', label: 'Quests' },
   { href: '/govern', label: 'Govern' },
 ] as const;

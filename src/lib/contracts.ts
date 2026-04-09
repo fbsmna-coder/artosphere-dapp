@@ -20,6 +20,16 @@ export const CONTRACTS = {
   DiscoveryOracle: "0xd0f23765Fe50b59f539fF695B17aF5b23D4AcBE0",
   DiscoveryStaking: "0x3Fc4d3466743e0c068797D64A91EF7A8826a19e2",
   ResearcherRegistry: "0x295410735a0d9f68850a94b97a43fff7a5961cc9",
+  // === Killer Features (Base Mainnet, deployed 2026-04-09) ===
+  SpectralNFT: "0xBCf0128AA0b2aee04D537D9f93D7f73d32f10AD9",
+  ReviewRewards: "0xe525A235C98fE32348c02A4EAa319B71ec5887C1",
+  PeerReviewDAO: "0xE75F7B805e149F73C2D68630E34CD5D441928623",
+  FalsificationMarket: "0x311E93f50aaDa3bF93061080024c54bd6F66701b",
+  PhiCoherence: "0x78520663798B1efD24058C6452BfF4136A8CDf75",
+  // === Safety & Upgrades ===
+  KillSwitch: "0x027092681c118Fb0cC314f7F3Cb42787C882D927",
+  FibonacciFusionV2: "0x1066f1ba1bf26af995c2592e648de98b8b9e1b09",
+  GnosisSafe: "0x75ba1367c9b2b750a1751dd527902e0f1d67a8fb",
 } as const;
 
 export const CHAIN_ID = 8453; // Base Mainnet

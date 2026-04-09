@@ -1,8 +1,36 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CONTRACTS, CHAIN_ID, BLOCK_EXPLORER } from "@/lib/contracts";
+
+/* ── JUNO Countdown Target ── */
+const JUNO_DATE = new Date("2028-01-01T00:00:00Z");
+
+function useCountdown(target: Date) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const diff = Math.max(0, target.getTime() - now.getTime());
+  const days = Math.floor(diff / 86_400_000);
+  const hours = Math.floor((diff % 86_400_000) / 3_600_000);
+  const minutes = Math.floor((diff % 3_600_000) / 60_000);
+  const seconds = Math.floor((diff % 60_000) / 1000);
+  return { days, hours, minutes, seconds };
+}
+
+/* ── KillSwitch Conditions ── */
+const KILL_CONDITIONS = [
+  { id: 1, label: "sin\u00B2\u03B8\u2081\u2082", experiment: "JUNO 2027\u20132028", active: true },
+  { id: 2, label: "\u03C7-boson 58 GeV", experiment: "HL-LHC 2028\u20132030", active: true },
+  { id: 3, label: "\u03B4_CP = 65.91\u00B0", experiment: "DUNE 2029", active: true },
+  { id: 4, label: "w\u2080 = \u22120.977", experiment: "DESI 2028", active: true },
+  { id: 5, label: "Axion", experiment: "ADMX 2031", active: true },
+  { id: 6, label: "M_H = 125.251", experiment: "FCC-ee 2036", active: true },
+];
 
 const STATS = [
   { label: "Total Supply", value: "1,618,033,988", suffix: "ARTS" },
@@ -54,6 +82,55 @@ const LINK_CARDS = [
     icon: "\uD83D\uDD2E",
   },
 ];
+
+function JunoCountdown() {
+  const { days, hours, minutes, seconds } = useCountdown(JUNO_DATE);
+  const units = [
+    { label: "Days", value: days },
+    { label: "Hours", value: hours },
+    { label: "Min", value: minutes },
+    { label: "Sec", value: seconds },
+  ];
+
+  return (
+    <section className="mb-fib-89">
+      <h2 className="text-sm font-semibold text-gold-dark uppercase tracking-widest mb-fib-21">
+        JUNO Resolution Event
+      </h2>
+      <div className="phi-card border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent">
+        <div className="text-center">
+          <p className="text-xs text-gray-500 uppercase tracking-wider mb-fib-8">
+            Countdown to JUNO precision data release
+          </p>
+
+          {/* Countdown digits */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6 my-fib-21">
+            {units.map((u) => (
+              <div key={u.label} className="flex flex-col items-center">
+                <span className="text-phi-lg sm:text-phi-2xl font-bold gold-text tabular-nums">
+                  {String(u.value).padStart(2, "0")}
+                </span>
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">
+                  {u.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Prediction */}
+          <div className="rounded-lg border border-amber-500/10 bg-amber-500/5 px-4 py-3 inline-block">
+            <p className="text-sm font-mono text-gold">
+              sin&sup2;&theta;&nbsp;&nbsp;= 1/(2&phi;) = 0.30902
+            </p>
+          </div>
+          <p className="text-xs text-gray-400 mt-fib-13">
+            If confirmed: first Discovery Staking resolution
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Dashboard() {
   return (
@@ -110,6 +187,46 @@ export default function Dashboard() {
               <p className="text-xs text-gray-600 mt-fib-5">{stat.suffix}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* JUNO Countdown */}
+      <JunoCountdown />
+
+      {/* KillSwitch Status */}
+      <section className="mb-fib-89">
+        <h2 className="text-sm font-semibold text-gold-dark uppercase tracking-widest mb-fib-21">
+          KillSwitch Status
+        </h2>
+        <div className="phi-card">
+          <p className="text-xs text-gray-500 mb-fib-13">
+            6 falsifiable predictions &mdash; any single failure triggers protocol pause
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-fib-13">
+            {KILL_CONDITIONS.map((c) => (
+              <div
+                key={c.id}
+                className="flex items-center gap-3 rounded-lg border border-dark-border px-4 py-3"
+              >
+                <span
+                  className={`inline-block h-2.5 w-2.5 rounded-full ${
+                    c.active ? "bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]"
+                  }`}
+                />
+                <div className="min-w-0">
+                  <p className="text-sm font-medium truncate">{c.label}</p>
+                  <p className="text-xs text-gray-500">{c.experiment}</p>
+                </div>
+                <span
+                  className={`ml-auto text-[10px] font-semibold uppercase tracking-wider ${
+                    c.active ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {c.active ? "ACTIVE" : "TRIGGERED"}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

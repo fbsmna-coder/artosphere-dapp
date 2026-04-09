@@ -1,0 +1,52 @@
+export const SPECTRAL_NFT_ABI = [
+  // ERC721 standard
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function tokenURI(uint256 tokenId) view returns (string)",
+  "function balanceOf(address owner) view returns (uint256)",
+  "function ownerOf(uint256 tokenId) view returns (address)",
+  "function totalSupply() view returns (uint256)",
+  "function tokenByIndex(uint256 index) view returns (uint256)",
+  "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)",
+  "function tokensOfOwner(address owner) view returns (uint256[])",
+  "function approve(address to, uint256 tokenId)",
+  "function setApprovalForAll(address operator, bool approved)",
+  "function getApproved(uint256 tokenId) view returns (address)",
+  "function isApprovedForAll(address owner, address operator) view returns (bool)",
+  "function transferFrom(address from, address to, uint256 tokenId)",
+  "function safeTransferFrom(address from, address to, uint256 tokenId)",
+  "function safeTransferFrom(address from, address to, uint256 tokenId, bytes data)",
+
+  // Spectral NFT specific
+  "function mint(address to, uint256 discoveryId, string title, string formula, uint256 mintAmount) returns (uint256 tokenId)",
+  "function getConfidence(uint256 tokenId) view returns (uint256 confidence)",
+  "function getStakingMultiplier(uint256 tokenId) view returns (uint256 multiplier)",
+  "function getStage(uint256 tokenId) view returns (string stage, string color)",
+  "function updateConfidenceTarget(uint256 tokenId, uint256 newCInf, uint256 newTau)",
+  "function exists(uint256 tokenId) view returns (bool)",
+  "function nextTokenId() view returns (uint256)",
+  "function scientist() view returns (address)",
+  "function spectralStates(uint256) view returns (uint256 discoveryId, uint256 c0, uint256 cInf, uint256 tau, uint256 t0, uint256 mintAmount, string title, string formula)",
+  "function supportsInterface(bytes4 interfaceId) view returns (bool)",
+  "function royaltyInfo(uint256 tokenId, uint256 salePrice) view returns (address receiver, uint256 amount)",
+
+  // Access control
+  "function DEFAULT_ADMIN_ROLE() view returns (bytes32)",
+  "function MINTER_ROLE() view returns (bytes32)",
+  "function ORACLE_ROLE() view returns (bytes32)",
+  "function DEFAULT_TAU() view returns (uint256)",
+  "function hasRole(bytes32 role, address account) view returns (bool)",
+  "function grantRole(bytes32 role, address account)",
+  "function revokeRole(bytes32 role, address account)",
+  "function renounceRole(bytes32 role, address callerConfirmation)",
+  "function getRoleAdmin(bytes32 role) view returns (bytes32)",
+
+  // Events
+  "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
+  "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
+  "event ApprovalForAll(address indexed owner, address indexed operator, bool approved)",
+  "event SpectralMinted(uint256 indexed tokenId, address indexed to, uint256 indexed discoveryId)",
+  "event SpectralUpdate(uint256 indexed tokenId, uint256 newCInf, uint256 newTau)",
+  "event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender)",
+  "event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender)",
+] as const;
