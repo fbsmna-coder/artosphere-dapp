@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   async headers() {
     return [
@@ -14,7 +15,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.walletconnect.com https://*.infura.io https://*.alchemy.com wss://*.walletconnect.com",
+              "connect-src 'self' https://*.walletconnect.com https://*.infura.io https://*.alchemy.com wss://*.walletconnect.com https://mainnet.base.org",
               "frame-src 'self' https://*.walletconnect.com",
             ].join("; "),
           },
